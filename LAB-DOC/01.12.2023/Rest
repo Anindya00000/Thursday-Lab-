@@ -1,0 +1,11 @@
+package com;
+
+public class Rest //Main class where 'main method' exists 
+{
+   public static void main(String []args)
+   {
+	   RestDemo ob = new RestDemo();
+	   ob.order();
+	   ob.showBill();
+   }
+}
