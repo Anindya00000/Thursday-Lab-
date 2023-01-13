@@ -1,0 +1,91 @@
+package com;
+import java.util.*;
+public class RestDemo 
+{
+  int pric=0;
+  double bcom=200.0,ccom=350.0,bplatter=150.0,kplatter=250.0,smomo=100.0,pmomo=120.0;
+  int f=0,total=0,i=0;
+  int rec[]= new int[100];
+  int qrec[]= new int[100];
+  double am[]=new double[100];
+  String ord[]={"Biriyani Combo","Chinese Combo","Bada Platter","kabab Platter","Steam Momo","Panfried Momo"};
+  Scanner sc = new Scanner(System.in);
+  
+  void order()  //get the order of customer
+  {
+	  System.out.println("--Welcome to Resturent Management System--");
+	  System.out.println("1.Biriyani Combo       Rs:200.0 \n2.Chinese Combo       Rs:350.0\n3.Bada Platter       Rs:150.0\n4.kabab Platter       Rs:250.0\n5.Steam Momo     Rs:100.0\n6.Panfried Momo     Rs:120.0");
+	  do
+	  {  
+		 System.out.print("Do you want to order(y/n): ");
+	     String ch = sc.nextLine();
+	     int quan=1,fid=0;
+	     switch(ch)
+		  {
+	        case "y":
+	         System.out.print("\nEnter the food id:");
+	         fid=sc.nextInt();
+	         System.out.print("\nEnter the quantity:");
+	         quan=sc.nextInt();
+	         am[i]=foodamount(fid,quan);
+	         qrec[i]=quan;
+	         rec[i]=fid;
+	         i++;
+	         sc.nextLine();
+	        break;
+	        case "n":
+	        	f=1;
+	        break;
+	        default:
+	        	System.out.println("\n\n--Invalid Input--\n\n");
+		  }
+	  }while(f!=1);
+  }
+  
+  int foodamount(int id,int quan)// calculate the amount of food
+  {
+	  int tl=0;
+	  switch(id)
+	  {
+	     case 1:
+	    	 tl+=(bcom*quan);
+	    	 total+=tl;
+	     break;
+
+	     case 2:
+	    	 tl+=(ccom*quan);
+	    	 total+=tl;
+	     break;
+
+	     case 3:
+	    	 tl+=(bplatter*quan);
+	    	 total+=tl;
+	     break;
+
+	     case 4:
+	    	 tl+=(kplatter*quan);
+	    	 total+=tl;
+	     break;
+
+	     case 5:
+	    	 tl+=(smomo*quan);
+	    	 total+=tl;
+	     break;
+
+	     case 6:
+	    	 tl+=(pmomo*quan);
+	    	 total+=tl;
+	     break;
+	  }
+	  return(tl);
+  }
+  
+  void showBill() // display the bill
+  {
+	  for(int j=0;j<i;j++)
+	  {
+	   System.out.println(ord[rec[j]-1]+"  "+qrec[j]+" "+am[j]);
+	  }
+	  System.out.println("\nTotal: "+total);
+  }
+}
