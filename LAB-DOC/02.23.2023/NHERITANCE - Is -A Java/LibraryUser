@@ -1,0 +1,7 @@
+package management;
+
+public interface LibraryUser   // LibraryUser interface which contain registerAccount and requestBook methods
+{
+	public void registerAccount();
+	public void requestBook();
+}
