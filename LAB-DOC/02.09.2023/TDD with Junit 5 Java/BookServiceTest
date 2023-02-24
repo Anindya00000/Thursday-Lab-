@@ -1,0 +1,93 @@
+package com.ems;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import com.ems.entity.Book;
+import com.ems.exception.BookException;
+import com.ems.service.BookService;
+
+
+class BookServiceTest {
+	
+	BookService bookService;
+
+	@BeforeEach
+	void setup()  
+	{
+		bookService=new BookService();
+	}
+
+	@AfterEach
+	void cleanup()  
+	{
+		bookService=null;
+		System.out.println("object is garbage collected");
+	}
+
+	@Test
+	@DisplayName("Test for Add  Book Into The Book Management System")
+	public void addBookTest()                                            //to test addBook method
+	{
+		bookService.addBook(101, "Java: The Complete Reference 12th Edition", "Herbert Schildt", 500, "MC Graw Hill");
+		bookService.addBook(102, "ANSI C", "E. Balagurusamy", 450, "MC Graw Hill");
+		
+		assertEquals(2, bookService.lengthOfList());
+		
+	}
+	
+	@Test
+	@DisplayName("Test for Display All Book")
+	public void testDisplayAll()                                        //to test displayAll method
+	{
+
+		bookService.addBook(101, "Java: The Complete Reference 12th Edition", "Herbert Schildt", 500, "MC Graw Hill");
+		bookService.addBook(102, "ANSI C", "E. Balagurusamy", 450, "MC Graw Hill");
+		
+		assertThat(bookService.displayAll()).isNotNull();
+		
+	}
+	
+	@Test
+	@DisplayName("Test for Display Book By Id")
+	public void testDisplayBookById()throws BookException                //to test displayById method
+	{
+		bookService.addBook(101, "Java: The Complete Reference 12th Edition", "Herbert Schildt", 500, "MC Graw Hill");
+		bookService.addBook(102, "ANSI C", "E. Balagurusamy", 450, "MC Graw Hill");
+		
+		Book b=bookService.displayById(101);
+		assertThat(b.getBookName()).isEqualTo("Java: The Complete Reference 12th Edition");
+		
+	}
+	
+	@Test
+	@DisplayName("Test for Update Book By Id")
+	public void testUpdateBookById()throws BookException                   //to test updateById method
+	{
+		bookService.addBook(101, "Java: The Complete Reference 12th Edition", "Herbert Schildt", 500, "MC Graw Hill");
+		bookService.addBook(102, "ANSI C", "E. Balagurusamy", 450, "MC Graw Hill");
+		
+		
+		Book b=bookService.updateById(101);
+		assertEquals("Python", b.getBookName());
+		
+	}
+	
+	@Test
+	@DisplayName("Test for Delete Book By Id")
+	public void testDeleteBookById()throws BookException               //to test deleteById method"
+	{
+		bookService.addBook(101, "Java: The Complete Reference 12th Edition", "Herbert Schildt", 500, "MC Graw Hill");
+		bookService.addBook(102, "ANSI C", "E. Balagurusamy", 450, "MC Graw Hill");
+		
+		
+		bookService.deleteById(101);
+		assertEquals(1, bookService.lengthOfList());
+	}
+	
+	
+
+}
